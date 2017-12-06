@@ -137,7 +137,7 @@ function initDaysFromWebData(weekId) {
 //    $.getJSON("./../../weekData.json", {weekId: weekId}, function (data) {
 //        setUpTable(data);
 //    });
-    setUpTable(JsonData);
+    setUpTable(JSON.parse(JsonData));
 }
 
 /**
