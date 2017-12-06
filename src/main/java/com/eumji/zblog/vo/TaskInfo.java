@@ -11,6 +11,14 @@ import java.io.Serializable;
 public class TaskInfo implements Serializable {
     private String projectName; //项目名
     private String taskName; //任务名
+    private long  stamp; //时间戳
+    public long getStamp() {
+        return stamp;
+    }
+    public void setStamp(long stamp) {
+        this.stamp = stamp;
+    }
+
     private int taskId; //任务名
     public String getProjectName() {
         return projectName;

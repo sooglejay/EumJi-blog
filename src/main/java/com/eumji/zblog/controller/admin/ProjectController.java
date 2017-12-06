@@ -45,7 +45,7 @@ public class ProjectController {
            project.setProjectName(pName);
            project.setProjectId(i+1);
            List<TaskInfo>taskInfos=new ArrayList<>();
-           for (int t=1;t<(10*Math.random());t++){
+           for (int t=1;t<(10*Math.random()+3);t++){
                TaskInfo taskInfo= new TaskInfo();
                taskInfo.setTaskName("这是任务-"+t);
                taskInfo.setProjectName(pName);
