@@ -142,9 +142,11 @@ function setUpRowWithData(rowIndex, projectData) {
  * @param weekId 这个参数用来定位某一周，它要传給后台
  */
 function initDaysFromWebData(weekId) {
+
     // $.getJSON("./../../weekData.json", {weekId: weekId}, function (data) {
     //     setUpTable(data);
     // });
+
     setUpTable(JSON.parse(JsonData));
 }
 
@@ -528,12 +530,12 @@ function submit(isSave) {
         return;
     }
     console.log(tableData);
+    var project = {projectName: "test project"};
+    project = project.serialize();
+    console.log(project);
     $.ajax({
-        data: {
-            status: isSave ? 0 : 1,
-            data: tableData
-        },
-        url: "/admin/update/project",
+        data: JSON.stringify(tableData),
+        url: "/update/project",
         method: "GET",
         success: function (data) {
             alert("提交成功");
@@ -544,17 +546,30 @@ function submit(isSave) {
     });
 }
 
+function initTable() {
+    var trs = $('#workTable').find('tr');
+    for (var tr = 2; tr < trs.length; tr++) {
+        if ($(trs[tr]).attr('id') == 'row_addTask_1')continue;
+        if ($(trs[tr]).attr('id') == 'row_0')continue;
+        $(trs[tr]).remove();
+    }
+    $("#td_project_1").attr('rowSpan',2);
+    $("#action_1").attr('rowSpan',2);
+}
+
 $(function () {
     var dayApp = new DayApp();
     var daysList = dayApp.getWorkDaysList(new Date());
     init(daysList);
 
     $("#btnPreWeek").click(function () {
+        initTable();
         var preWeekDaysList = dayApp.getPreWorkDaysList();
         init(preWeekDaysList);
     });
 
     $("#btnNextWeek").click(function () {
+        initTable();
         var nextWeekDaysList = dayApp.getNextWorkDaysList();
         init(nextWeekDaysList);
     });

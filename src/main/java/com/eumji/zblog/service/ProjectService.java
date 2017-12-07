@@ -13,6 +13,7 @@ import java.util.List;
 */
 public interface ProjectService {
     Project getProjectByName(String projectName);
+    void saveProject(Project project);
     void updateProject(Project project);
     List<Project> getAllProjects();
 }

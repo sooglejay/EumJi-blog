@@ -21,15 +21,15 @@ import java.util.List;
 @Alias("project")
 public class Project implements Serializable {
    private String projectName;
-   private int projectId;
-   List<TaskInfo> tasks;
+   private long id;
+//   List<TaskInfo> tasks;
 
     @Override
     public String toString() {
         return "Project{" +
                 "projectName='" + projectName + '\'' +
-                ", projectId=" + projectId +
-                ", tasks=" + tasks +
+                ", id=" + id +
+//                ", tasks=" + tasks +
                 '}';
     }
 
@@ -41,19 +41,19 @@ public class Project implements Serializable {
         this.projectName = projectName;
     }
 
-    public int getProjectId() {
-        return projectId;
+    public long getProjectId() {
+        return id;
     }
 
     public void setProjectId(int projectId) {
-        this.projectId = projectId;
+        this.id = projectId;
     }
 
-    public List<TaskInfo> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<TaskInfo> tasks) {
-        this.tasks = tasks;
-    }
+//    public List<TaskInfo> getTasks() {
+//        return tasks;
+//    }
+//
+//    public void setTasks(List<TaskInfo> tasks) {
+//        this.tasks = tasks;
+//    }
 }

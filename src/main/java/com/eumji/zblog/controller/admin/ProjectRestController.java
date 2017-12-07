@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,48 +27,43 @@ import java.util.List;
  * TIME: 15:32
  */
 @RestController
-public class ProjectController {
+public class ProjectRestController {
 
     @Autowired
     private ProjectService projectService;
 
-    /**
-     * 获取用户信息
-     * @return
-     */
-    @RequestMapping("/admin/project/get")
-    @ResponseBody
-    public ResultInfo getProjectInfo(){
-
-       List<Project>projects = new ArrayList<>();
-       for (int i=1;i<=4;i++){
-           Project project = new Project();
-           String pName = "这是项目-"+i;
-           project.setProjectName(pName);
-           project.setProjectId(i+1);
-           List<TaskInfo>taskInfos=new ArrayList<>();
-           for (int t=1;t<(10*Math.random()+3);t++){
-               TaskInfo taskInfo= new TaskInfo();
-               taskInfo.setTaskName("这是任务-"+t);
-               taskInfo.setProjectName(pName);
-               taskInfo.setTaskId(t);
-               taskInfos.add(taskInfo);
-           }
-           project.setTasks(taskInfos);
-           projects.add(project);
-       }
-        return new ResultInfo("200","",projects);
-
+    @RequestMapping(value = "/jw", method = RequestMethod.GET)
+    public ModelAndView login() {
+        ModelAndView mv = new ModelAndView("oa/index");
+        return mv;
     }
 
-    @RequestMapping("/admin/update/project")
+    /**
+     * 获取用户信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/admin/project/save", method = RequestMethod.POST)
     @ResponseBody
-    public ResultInfo updateProjectInfo(List<Project> userInfo){
-//        projectService.updateProject(userInfo);
-        System.out.print(userInfo);
+    public ResultInfo saveNewProject(String projectName) {
+//        Project p = new Project();
+//        p.setProjectName(projectName);
+//        projectService.saveProject(p);
+        return new ResultInfo("200", "good!");
+    }
+
+    @RequestMapping("/admin/project/update")
+    @ResponseBody
+    public ResultInfo updateProjectInfo(String projectName) {
+        Project p = new Project();
+        p.setProjectName(projectName);
+        projectService.updateProject(p);
+        System.out.print(p);
         return ResultInfoFactory.getSuccessResultInfo("更新个人信息成功!!");
     }
 
 }
+
+
 
 

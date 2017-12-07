@@ -26,8 +26,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public void saveProject(Project project) {
+        projectMapper.saveProject(project);
+    }
+
+    @Override
     public void updateProject(Project project) {
-         projectMapper.updateProject(project);
+        projectMapper.updateProject(project);
 
     }
 
@@ -36,5 +41,6 @@ public class ProjectServiceImpl implements ProjectService {
         return projectMapper.getAllProjects();
     }
 }
+
 
 

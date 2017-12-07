@@ -29,5 +29,11 @@ public interface ProjectMapper {
      * @return
      */
     List<Project> getAllProjects();
-    void updateProject(Project userInfo);
+    void updateProject(Project newProjectInfo);
+
+    /**
+     * 保存新项目
+     * @param newProjectInfo
+     */
+    void saveProject(Project newProjectInfo);
 }
