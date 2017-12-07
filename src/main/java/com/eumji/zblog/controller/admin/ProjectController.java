@@ -59,10 +59,11 @@ public class ProjectController {
 
     }
 
-    @RequestMapping("/admin/project/update")
+    @RequestMapping("/admin/update/project")
     @ResponseBody
-    public ResultInfo updateProjectInfo(Project userInfo){
-        projectService.updateProject(userInfo);
+    public ResultInfo updateProjectInfo(List<Project> userInfo){
+//        projectService.updateProject(userInfo);
+        System.out.print(userInfo);
         return ResultInfoFactory.getSuccessResultInfo("更新个人信息成功!!");
     }
 

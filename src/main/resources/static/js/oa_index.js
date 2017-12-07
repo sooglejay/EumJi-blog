@@ -533,7 +533,7 @@ function submit(isSave) {
             status: isSave ? 0 : 1,
             data: tableData
         },
-        url: "/update/project",
+        url: "/admin/update/project",
         method: "GET",
         success: function (data) {
             alert("提交成功");
