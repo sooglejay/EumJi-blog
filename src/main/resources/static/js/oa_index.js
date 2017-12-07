@@ -95,7 +95,10 @@ function getWeekId(daysList) {
     var weekId = new Date(daysList[0].setHours(0, 0, 0, 0)).getTime();
     return weekId;
 }
-
+/**
+ * 初始化表格
+ * @param data 从后台获取的数据
+ */
 function setUpTable(data) {
     if (data['work'] != undefined) {
         var work = data.work;
@@ -108,6 +111,11 @@ function setUpTable(data) {
     }
 }
 
+/**
+ * 初始化表格的 一个项目
+ * @param rowIndex 项目行
+ * @param projectData 项目数据
+ */
 function setUpRowWithData(rowIndex, projectData) {
 
     var projectName = projectData['projectName'];
@@ -116,6 +124,7 @@ function setUpRowWithData(rowIndex, projectData) {
     $("#input_project_" + rowIndex).append('<option selected="selected" value="' + projectId + '">' + projectName + '</option>');
     for (var t = 1; t <= tasks.length; t++) {
         if (t > 1) {
+            //添加一个新任务 需要先把html给渲染好，再填充任务数据
             addTask($("#addTask_" + rowIndex));
         }
         var taskName = tasks[t - 1]['taskName'];
@@ -486,6 +495,10 @@ function getTableData() {
             }
             for (var d = 1; d <= 5; d++) {
                 var hours = $('#input_day_' + d + '_' + t + '_' + p).val();
+                if (hours.length < 1) {
+                    //空字符串，说明这个任务今天没有做，就传0或者-1，这个可以跟后台协商
+                    hours = 0;
+                }
                 if (isFloat(hours)) {
                     hours = parseFloat(hours);
                 } else {
@@ -524,6 +537,9 @@ function submit(isSave) {
         method: "GET",
         success: function (data) {
             alert("提交成功");
+        }, error: function (e) {
+            console.log(e);
+            alert(e);
         }
     });
 }
